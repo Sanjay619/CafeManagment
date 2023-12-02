@@ -4,7 +4,7 @@
         import com.inn.cafee.constant.CafeConstants;
         import com.inn.cafee.dao.UserDao;
         import com.inn.cafee.service.UserService;
-        import com.inn.cafee.urils.CafeUtils;
+        import com.inn.cafee.utils.CafeUtils;
         import lombok.extern.slf4j.Slf4j;
         import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.http.HttpStatus;
@@ -12,7 +12,6 @@
         import org.springframework.stereotype.Service;
 
         import java.util.Base64;
-        import java.util.HexFormat;
         import java.util.Map;
         import java.util.Objects;
 

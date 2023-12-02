@@ -2,8 +2,7 @@ package com.inn.cafee.restImpl;
 
 import com.inn.cafee.rest.UserRest;
 import com.inn.cafee.service.UserService;
-import com.inn.cafee.urils.CafeUtils;
-import org.apache.catalina.User;
+import com.inn.cafee.utils.CafeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
