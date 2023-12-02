@@ -50,16 +50,10 @@ public class SecurityConfig  {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
    @Bean
    public SecurityFilterChain setSecurityFilterChain(HttpSecurity http) throws Exception {
-
-//        return http.authorizeHttpRequests((auth) -> {
-//            auth.requestMatchers("/user/signup").permitAll();
-//            auth.requestMatchers("/user/**").hasAnyRole("ADMIN", "USER");
-//
- //       }).httpBasic().and().build();
-
-       http.cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.disable())
+        http.cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.disable())
                .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
                .authorizeHttpRequests((authz) -> authz
                        .requestMatchers("/user/signup", "/user/login", "/user/forgetPassword")
@@ -74,33 +68,6 @@ public class SecurityConfig  {
                );
        http.addFilterBefore(jwtFileter, UsernamePasswordAuthenticationFilter.class);
        return http.build();
-
-
-   //            http.httpBasic(withDefaults());
-     //  return http.build();
-//
-////        http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())
-////                .disable()
-////                .csrf()
-////                .disable()
-////                .authorizeHttpRequests()
-////                .requestMatchers("/user/signup", "/user/login", "/user/forgetPassword")
-////                .permitAll()
-////                .anyRequest()
-////                .authenticated()
-////                .and()
-////                .exceptionHandling()
-////                .and()
-////                .sessionManagement()
-////                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//
-//        http.csrf().disable().authorizeHttpRequests().
-//                requestMatchers("/user/signup", "/user/login", "/user/forgetPassword")
-//                .permitAll().anyRequest().authenticated().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//
-//
-//        http.addFilterBefore(jwtFileter, UsernamePasswordAuthenticationFilter.class);
-//        return http.build();
     }
 
 
