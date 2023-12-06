@@ -13,9 +13,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -40,8 +42,10 @@ public class SecurityConfig  {
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider(){
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+
         daoAuthenticationProvider.setUserDetailsService(this.customerUserDetailsService);
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+
 
         return daoAuthenticationProvider;
     }
@@ -66,8 +70,12 @@ public class SecurityConfig  {
                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
                );
+
        http.addFilterBefore(jwtFileter, UsernamePasswordAuthenticationFilter.class);
-       return http.build();
+
+       http.authenticationProvider(daoAuthenticationProvider());
+       DefaultSecurityFilterChain filerChain = http.build();
+       return filerChain;
     }
 
 

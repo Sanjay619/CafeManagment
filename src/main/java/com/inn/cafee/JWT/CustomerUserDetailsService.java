@@ -32,6 +32,8 @@ public class CustomerUserDetailsService implements UserDetailsService {
     }
 
     public com.inn.cafee.POJO.User getUserDetails(){
+//        com.inn.cafee.POJO.User user = userDetails;
+//        user.setPassword(null);
         return userDetails;
     }
 }
